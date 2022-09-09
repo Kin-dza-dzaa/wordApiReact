@@ -9,10 +9,14 @@ export const GlobalStyle =  createGlobalStyle`
 }
 
 body {
-    background: rgb(12,12,12);
+    background: rgb(12, 12, 12, 0.93);
     font-family: 'Ubuntu', sans-serif; 
     color: white;  
     min-height: 100vh;
+}
+
+hmtl {
+    font-size: 16.5px;
 }
 
 #root{
@@ -24,9 +28,7 @@ a:link, a:visited {
     text-decoration: none;
 }
 
-@media (max-width: 640px) { 
-    .app-bar__label {
-        display: none;
-    }
+@media (max-width: 640px) {
+html { font-size: 12px; }
 }
 `

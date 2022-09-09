@@ -1,24 +1,18 @@
-import React, { useState } from 'react';
-import { NavLink } from "react-router-dom";
-import { Ul, Label, Input, Span } from "./styled-app-bar";
+import React from 'react';
+import { Ul, Label, Input, NavLink } from "./styled-app-bar";
 
-interface appBarProps {
-  toggleAnimation():void
-}
-
-const AppBar = (props:appBarProps): JSX.Element => {
+const AppBar = (): JSX.Element => {
   return (
     <React.Fragment>
       <Ul className="app-bar">
         <li>
-          <NavLink to="/" className={({ isActive }) => isActive ? "selected" : undefined }><Span className="app-bar__home-page">WordDict</Span>
-          </NavLink>
+          <NavLink to="/" className={({ isActive }:{isActive: boolean}) => isActive ? "selected" : undefined }>WordDict</NavLink>
         </li>
         <li>
-          <Input onClick={props.toggleAnimation} type="checkbox" id="animation" name="scales"/>
           <Label className="app-bar__label" htmlFor="animation">Get started</Label>
         </li>
       </Ul>
+      <Input type="checkbox" id="animation" name="scales"/>
     </React.Fragment>
   )
 }
