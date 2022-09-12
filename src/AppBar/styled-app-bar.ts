@@ -6,12 +6,18 @@ export const Ul = styled.ul`
     width: 100vw;
     list-style: none;
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     align-items: center;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    @media (max-width: 640px) {
-        .app-bar__label {
-            display: none;
-        }
+    button {
+        font-size: 1rem;
+        padding: 5px 8px 5px 8px;
+        background-color: black;
+        color: white;
+        border-radius: 10px;
+        border: 0;
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+        cursor: pointer;
+        margin-left: calc(100% - 100px);
     }
 `
 
@@ -20,30 +26,25 @@ export const NavLink = styled(Link)`
     font-size: 1.65rem;
 `
 
-export const Input = styled.input`
-    display: none;
-    :checked~.login-pop-up {
-        opacity: 1;
-        top: 22%;
-    }
-    body &:checked~.login-pop-up {
-        z-index: 1;
-    }
-`
-
-export const Label = styled.label`
-    position: fixed;
-    font-size: 1.4rem;
-    bottom: 91.5vh;
-    left: 73vw;
+export const A = styled.a`
+    display: inline-block;
+    margin-left: calc(100% - 130px);
     cursor: pointer;
     padding: 4px 8px 4px 8px; 
     border-radius: 25px;
     background: rgba(35,105,237, 1);
     user-select: none;
-    transition: 0.2s;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    transition: 0.2s;    
+    span {
+        color: white;
+        font-size: 1.3rem;
+    }
     :hover {
         transform: translateY(-3px);
+    }
+    @media (max-width: 240px) {
+        display: none;
     }
 `
 

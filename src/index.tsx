@@ -1,20 +1,36 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import HomePage from './Home/home';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { GlobalStyle } from './global-style';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import App from './App/app';
+
+const queryClient = new QueryClient(
+  {
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      }
+    }
+  }
+)
 
 const root:ReactDOM.Root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+    <ReactQueryDevtools initialIsOpen={true} />
     <GlobalStyle/>
     <BrowserRouter>
     <Routes>
-      <Route path="/" element={<HomePage />}/>
+      <Route path="/" element={<App />}/>
     </Routes>
   </BrowserRouter>
+  </QueryClientProvider>
   </React.StrictMode>
 );
 

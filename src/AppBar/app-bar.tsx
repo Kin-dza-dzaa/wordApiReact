@@ -1,7 +1,20 @@
+import { useQueryClient } from '@tanstack/react-query';
 import React from 'react';
-import { Ul, Label, Input, NavLink } from "./styled-app-bar";
+import { UserLogOut } from '../api/user-calls';
+import { Ul, A, NavLink } from "./styled-app-bar";
 
-const AppBar = (): JSX.Element => {
+export const AppBar = (props: {userState: boolean, setState: React.Dispatch<React.SetStateAction<boolean>>}): JSX.Element => {
+  const LogOut: () => void = (): void => {
+    const options: RequestInit  = {
+      method: "GET",
+      mode: "cors",
+      credentials: "include",
+    }
+    UserLogOut(options);
+    const queryClient = useQueryClient();
+    queryClient.invalidateQueries(["words"]);
+    props.setState(!props.userState);
+  }
   return (
     <React.Fragment>
       <Ul className="app-bar">
@@ -9,12 +22,10 @@ const AppBar = (): JSX.Element => {
           <NavLink to="/" className={({ isActive }:{isActive: boolean}) => isActive ? "selected" : undefined }>WordDict</NavLink>
         </li>
         <li>
-          <Label className="app-bar__label" htmlFor="animation">Get started</Label>
+          {!props.userState ? <A href='#sign-in'><span>Get started</span></A> : <button onClick={ LogOut }>Log out</button>}
         </li>
       </Ul>
-      <Input type="checkbox" id="animation" name="scales"/>
     </React.Fragment>
   )
 }
 
-export default AppBar

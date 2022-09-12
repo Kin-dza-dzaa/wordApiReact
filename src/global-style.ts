@@ -4,13 +4,13 @@ export const GlobalStyle =  createGlobalStyle`
 *{
     margin: 0;
     padding: 0;
-    outline:0;
-    box-sizing:border-box;
+    outline: 0;
+    box-sizing: border-box;
 }
 
 body {
-    background: rgb(12, 12, 12, 0.93);
-    font-family: 'Ubuntu', sans-serif; 
+    background: rgba(32, 32, 32, 1);
+    font-family: 'Roboto', sans-serif;
     color: white;  
     min-height: 100vh;
 }
@@ -24,11 +24,11 @@ hmtl {
 }
 
 a:link, a:visited {
-    color: blue;
+    color: rgba(65, 23, 255, 1);
     text-decoration: none;
 }
 
 @media (max-width: 640px) {
-html { font-size: 12px; }
+    html { font-size: 12px; }
 }
 `
