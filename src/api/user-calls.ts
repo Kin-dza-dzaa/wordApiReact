@@ -1,12 +1,12 @@
 export interface UserDataRegister {
-  email: string|undefined,
-  user_name: string|undefined,
-  password: string|undefined,
+  email: string,
+  user_name: string,
+  password: string,
 }
 
 export interface UserDataLogin {
-  email: string|undefined,
-  password: string|undefined,
+  email: string,
+  password: string,
 }
 
 export const UserSignIn = async function (options: RequestInit): Promise<any> {
@@ -14,17 +14,17 @@ export const UserSignIn = async function (options: RequestInit): Promise<any> {
   return response.json();
 }
 
-export const UserSignUp = async function (options: RequestInit): Promise<Response> {
+export const UserSignUp = async function (options: RequestInit): Promise<any> {
   const response: Response = await fetch("http://localhost:8000/user", options);
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
-  }
-  return response;
+  return response.json();
 }
 
-export const UserLogOut = async function (options: RequestInit): Promise<void> {
+export const UserLogOut = async function (options: RequestInit): Promise<any> {
   const response: Response = await fetch("http://localhost:8000/user/log-out", options);
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
-  }
+  return response.json();
+}
+
+export const UserCheck = async function (options: RequestInit): Promise<any> {
+  const response: Response = await fetch("http://localhost:8000/user/check", options);
+  return response.json();
 }

@@ -1,4 +1,5 @@
-import styled, { keyframes } from "styled-components";
+import { Link } from "react-router-dom";
+import styled, { keyframes , css } from "styled-components";
 
 const vibration = keyframes`
     25% {
@@ -14,36 +15,30 @@ const vibration = keyframes`
         transform: translateX(-2px);
     }
 ` 
+const initialAnimation = keyframes`
+    from {
+        opacity: 0;
+        top: 100%;
+    }
+    to {
+        opacity: 1;
+        top: 25%;
+    }
+` 
 
 export const Div = styled.div`
     position: fixed;
+    width: 35vw;
+    top: 100vh;
+    left: 32.5vw;
     opacity: 0;
-    width: 35%;
-    top: 100%;
-    left: 32.5%;
-    transition: 0.26s;
-    z-index: -1;
-
-    .login-pop-up__sign-in__transparent-link {
-        z-index: -1;
-        cursor: pointer;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.4);
-    }
-
-    :target {
-        opacity: 1;
-        z-index: 1;
-        top: 25vh;
-    }
+    animation-name: ${initialAnimation};
+    animation-duration: 0.26s;
+    animation-fill-mode: forwards;
 
     @media (max-width: 800px) {
-            width: 100%;
-            left: 0;
+        width: 100%;
+        left: 0;
     }
 
     div {
@@ -54,6 +49,11 @@ export const Div = styled.div`
     }
 
     form {
+        .invalid {
+            border: 1px solid red;
+            box-shadow: 0px 0px 1px 1px red;
+            animation: ${vibration} 0.2s; 
+        }
         box-shadow: rgba(99, 99, 99, 0.4) 2px 2px 4px 2px;        
         border-radius: 3%;
         background-color: white;
@@ -63,21 +63,12 @@ export const Div = styled.div`
         grid-template-rows: repeat(3, 1fr);
         place-items: center;
 
-        input {
+        .login-pop-up__sumbit {
             width: 100%;
+            width: 50%;
             height: 35px;
             border: 1px solid rgba(180, 180, 180, 1);
             border-radius: 3px;
-            :invalid {
-                animation: ${vibration} 0.2s; 
-            }   
-            :not(.login-pop-up__sumbit):focus {
-                border: 2px solid rgba(56, 187, 255, 0.8);
-                box-shadow: 0px 0px 1px 1px rgba(56, 187, 255, 0.8);
-            }
-        }
-        .login-pop-up__sumbit {
-            width: 50%;
             transition: 0.2s;
             background-color: black;
             color: white;
@@ -109,4 +100,37 @@ export const Div = styled.div`
         background-color: white;
     }
 }
+`
+export const Input = styled.input`
+    width: 100%;
+    height: 35px;
+    border: 1px solid rgba(180, 180, 180, 1);
+    border-radius: 3px;   
+
+    ${(props: {invalid: boolean}) => {
+        if (props.invalid) {
+            return css`
+                animation: ${vibration} 0.2s;
+                border: 2px solid red;
+                box-shadow: 0px 0px 1px 1px red;
+            `
+        } else {
+            return css`
+                :focus {
+                    border: 2px solid rgba(56, 187, 255, 0.8);
+                    box-shadow: 0px 0px 1px 1px rgba(56, 187, 255, 0.8);
+                }
+            `
+        }
+    }}
+`
+
+export const StyledLink = styled(Link)`
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    background-color: rgba(0, 0, 0, 0.4);
 `

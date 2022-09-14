@@ -18,6 +18,9 @@ export const Ul = styled.ul`
         box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
         cursor: pointer;
         margin-left: calc(100% - 100px);
+        :hover {
+            transform: translateY(-3px);
+        }
     }
 `
 
@@ -26,7 +29,7 @@ export const NavLink = styled(Link)`
     font-size: 1.65rem;
 `
 
-export const A = styled.a`
+export const StyledLink = styled(Link)`
     display: inline-block;
     margin-left: calc(100% - 130px);
     cursor: pointer;

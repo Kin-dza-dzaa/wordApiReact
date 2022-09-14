@@ -4,9 +4,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { GlobalStyle } from './global-style';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import App from './App/app';
+import App from './App';
 
-const queryClient = new QueryClient(
+export const queryClient = new QueryClient(
   {
     defaultOptions: {
       queries: {
@@ -26,10 +26,10 @@ root.render(
     <ReactQueryDevtools initialIsOpen={true} />
     <GlobalStyle/>
     <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />}/>
-    </Routes>
-  </BrowserRouter>
+      <Routes>
+        <Route path="/*" element={<App />} />
+      </Routes>
+    </BrowserRouter>
   </QueryClientProvider>
   </React.StrictMode>
 );

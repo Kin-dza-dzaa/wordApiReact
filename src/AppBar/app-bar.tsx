@@ -1,28 +1,32 @@
-import { useQueryClient } from '@tanstack/react-query';
 import React from 'react';
+import { queryClient } from '..';
 import { UserLogOut } from '../api/user-calls';
-import { Ul, A, NavLink } from "./styled-app-bar";
+import { useAuthContext } from '../hooks/useAuthContext';
+import { Ul, StyledLink, NavLink } from "./styled-app-bar";
 
-export const AppBar = (props: {userState: boolean, setState: React.Dispatch<React.SetStateAction<boolean>>}): JSX.Element => {
+export const AppBar = (): JSX.Element => {
+  const authContext = useAuthContext();
   const LogOut: () => void = (): void => {
     const options: RequestInit  = {
       method: "GET",
       mode: "cors",
       credentials: "include",
     }
-    UserLogOut(options);
-    const queryClient = useQueryClient();
-    queryClient.invalidateQueries(["words"]);
-    props.setState(!props.userState);
+    UserLogOut(options)
+    .then((response) => {
+      if (response.result === "ok") {
+        queryClient.invalidateQueries(["user"]);
+      }
+    });
   }
   return (
     <React.Fragment>
       <Ul className="app-bar">
         <li>
-          <NavLink to="/" className={({ isActive }:{isActive: boolean}) => isActive ? "selected" : undefined }>WordDict</NavLink>
+          <NavLink to="/">WordDict</NavLink>
         </li>
         <li>
-          {!props.userState ? <A href='#sign-in'><span>Get started</span></A> : <button onClick={ LogOut }>Log out</button>}
+          {authContext.LogState ? <button onClick={LogOut}>Logout</button> : <StyledLink to='sign-in'><span>Get started</span></StyledLink>}
         </li>
       </Ul>
     </React.Fragment>
