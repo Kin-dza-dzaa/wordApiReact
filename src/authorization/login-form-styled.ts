@@ -36,16 +36,20 @@ export const Div = styled.div`
     animation-duration: 0.26s;
     animation-fill-mode: forwards;
 
-    @media (max-width: 800px) {
-        width: 100%;
-        left: 0;
-    }
-
     div {
         font-size: 1rem;
         color: black;
         user-select: none;
         height: 35px;
+    }
+
+    .login-pop-up__sign-in--wrong-input {
+        position: absolute;
+        bottom: 145px;
+        left: calc(50% - 5rem);
+        font-size: 0.85rem;
+        color: red;
+        user-select: none;
     }
 
     form {
@@ -57,7 +61,7 @@ export const Div = styled.div`
         box-shadow: rgba(99, 99, 99, 0.4) 2px 2px 4px 2px;        
         border-radius: 3%;
         background-color: white;
-        padding: 60px 60px 0 60px;
+        padding: 40px 40px 20px 40px;
         display: grid;
         gap: 30px;
         grid-template-rows: repeat(3, 1fr);
@@ -89,15 +93,20 @@ export const Div = styled.div`
     }
 
     .label-user-name {
-        bottom: calc(230px + 0.6rem);
+        bottom: calc(250px + 0.6rem);
         background-color: white;
-        left: 67px;
+        left: 47px;
     }
 
     .label-password {
-        left: calc(67px - 2.55rem);
-        bottom: calc(165px + 0.66rem);
+        left: calc(47px - 2.55rem);
+        bottom: calc(185px + 0.66rem);
         background-color: white;
+    }
+
+    @media (max-width: 800px) {
+        width: 100%;
+        left: 0;
     }
 }
 `

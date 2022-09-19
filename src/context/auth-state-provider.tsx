@@ -1,25 +1,32 @@
-import { useQuery } from "@tanstack/react-query";
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import { UserCheck } from "../api/user-calls";
-// import Skeleton from 'react-loading-skeleton'
-// import 'react-loading-skeleton/dist/skeleton.css'
+import React from 'react';
 
-export const AuthContext = createContext({} as {LogState: boolean, SetLogState: React.Dispatch<React.SetStateAction<boolean>>});
+export const AuthContext = createContext({} as {LogState: boolean, setLogState: React.Dispatch<React.SetStateAction<boolean>>});
 
-export const AuthProvider = ({children} : {children: JSX.Element}) => {
-    const [LogState, SetLogState] = useState(false); 
-    const options: RequestInit = {
-        method: "GET",
-        mode: "cors",
-        credentials: "include",
-      }
-    const result = useQuery(["user"], () => UserCheck(options), {onSuccess(data) {
-        SetLogState(data.result === "ok");
-    },},);
-
-    return (
-        <AuthContext.Provider value={{LogState, SetLogState}}>
-            {children}
-        </AuthContext.Provider>
-    );
+export const AuthProvider = ({children} : {children: JSX.Element}): JSX.Element => {
+    const [LogState, setLogState] = useState(false); 
+    const [isLoading, setLoading] = useState(true); 
+    useEffect(() => {
+        UserCheck().then((res) => {
+            if (res.result === "ok") {
+                setLogState(true);
+                setLoading(false);
+            } else {
+                setLogState(false);
+                setLoading(false);
+            }
+        });
+    }, [LogState]);
+    if (isLoading) {
+        return (
+            <></>
+        );
+    } else {
+        return (
+            <AuthContext.Provider value={{LogState, setLogState}}>
+                {children}
+            </AuthContext.Provider>
+        );  
+    }
 }

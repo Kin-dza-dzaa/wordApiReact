@@ -9,6 +9,12 @@ export interface UserDataLogin {
   password: string,
 }
 
+const options: RequestInit = {
+  method: "GET",
+  mode: "cors",
+  credentials: "include",
+}
+
 export const UserSignIn = async function (options: RequestInit): Promise<any> {
   const response: Response = await fetch("http://localhost:8000/user/token", options);
   return response.json();
@@ -24,7 +30,7 @@ export const UserLogOut = async function (options: RequestInit): Promise<any> {
   return response.json();
 }
 
-export const UserCheck = async function (options: RequestInit): Promise<any> {
+export const UserCheck = async function (): Promise<any> {
   const response: Response = await fetch("http://localhost:8000/user/check", options);
   return response.json();
 }

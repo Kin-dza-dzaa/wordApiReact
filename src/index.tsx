@@ -21,7 +21,7 @@ const root:ReactDOM.Root = ReactDOM.createRoot(
 );
 
 root.render(
-  <React.StrictMode>
+  <React.Fragment>
     <QueryClientProvider client={queryClient}>
     <ReactQueryDevtools initialIsOpen={true} />
     <GlobalStyle/>
@@ -31,7 +31,7 @@ root.render(
       </Routes>
     </BrowserRouter>
   </QueryClientProvider>
-  </React.StrictMode>
+  </React.Fragment>
 );
 
 // If you want to start measuring performance in your app, pass a function

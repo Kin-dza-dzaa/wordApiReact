@@ -1,5 +1,4 @@
 import React from 'react';
-import { queryClient } from '..';
 import { UserLogOut } from '../api/user-calls';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { Ul, StyledLink, NavLink } from "./styled-app-bar";
@@ -15,7 +14,7 @@ export const AppBar = (): JSX.Element => {
     UserLogOut(options)
     .then((response) => {
       if (response.result === "ok") {
-        queryClient.invalidateQueries(["user"]);
+        authContext.setLogState(false);
       }
     });
   }

@@ -31,7 +31,8 @@ export const NavLink = styled(Link)`
 
 export const StyledLink = styled(Link)`
     display: inline-block;
-    margin-left: calc(100% - 130px);
+    margin-left: calc(100% - 140px);
+    margin-top: 1.65%;
     cursor: pointer;
     padding: 4px 8px 4px 8px; 
     border-radius: 25px;
@@ -45,9 +46,6 @@ export const StyledLink = styled(Link)`
     }
     :hover {
         transform: translateY(-3px);
-    }
-    @media (max-width: 240px) {
-        display: none;
     }
 `
 

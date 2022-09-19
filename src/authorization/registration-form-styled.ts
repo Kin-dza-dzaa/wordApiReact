@@ -43,11 +43,6 @@ export const Div = styled.div`
         top: 25vh;
     }
 
-    @media (max-width: 800px) {
-            width: 100%;
-            left: 0;
-    }
-
     div {
         color: black;
         font-size: 1rem;
@@ -55,11 +50,20 @@ export const Div = styled.div`
         height: 35px;
     }
 
+    .login-pop-up__sign-up--wrong-input {
+        position: absolute;
+        bottom: 145px;
+        left: calc(50% - 3.8rem);
+        font-size: 0.85rem;
+        color: red;
+        user-select: none;
+    }
+
     form {
         box-shadow: rgba(99, 99, 99, 0.4) 2px 2px 4px 2px;        
         border-radius: 3%;
         background-color: white;
-        padding: 60px 60px 0 60px;
+        padding: 40px 40px 20px 40px;
         display: grid;
         gap: 30px;
         grid-template-rows: repeat(3, 1fr);
@@ -91,23 +95,27 @@ export const Div = styled.div`
     }
 
     .login-pop-up__sign-up-labels.label-user-name {
-        bottom: calc(295px + 0.7rem);
+        bottom: calc(315px + 0.7rem);
         background-color: white;
-        left: 67px;
+        left: 47px;
     }
 
     .login-pop-up__sign-up-labels.label-email {
-        left: calc(67px - 4.735rem);
-        bottom: calc(230px + 0.62rem);
+        left: calc(47px - 4.735rem);
+        bottom: calc(250px + 0.62rem);
         background-color: white;
     }
 
     .login-pop-up__sign-up-labels.label-password {
-        left: calc(67px - 7.2rem);
-        bottom: calc(165px + 0.62rem);
+        left: calc(47px - 7.2rem);
+        bottom: calc(185px + 0.62rem);
         background-color: white;
     }
-}
+
+    @media (max-width: 800px) {
+        width: 100%;
+        left: 0;
+    }
 `
 export const Input = styled.input`
     width: 100%;

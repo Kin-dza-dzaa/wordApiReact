@@ -10,7 +10,7 @@ export const GlobalStyle =  createGlobalStyle`
 
 body {
     background: rgba(32, 32, 32, 1);
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Noto Sans JP', sans-serif;
     color: white;  
     min-height: 100vh;
 }

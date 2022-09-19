@@ -13,6 +13,7 @@ const App = ():JSX.Element => {
             <Route path='/' element={<Home />}>
               <Route path='sign-in' element={<LoginForm />}/>
               <Route path='sign-up' element={<RegistrationForm />}/>
+              <Route path='collection/:name' element={<RegistrationForm />}/>
             </Route>
           </Routes>
         </AuthProvider>

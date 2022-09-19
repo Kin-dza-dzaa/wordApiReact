@@ -9,6 +9,7 @@ export const RegistrationForm = () => {
     const [ivalidEmail, setEmailValidation] = useState(false);
     const [invalidUserName, setUserNameValidation] = useState(false);
     const [invalidPassword, setPasswordValidation] = useState(false);
+    const [apiRejected, setRejection] = useState(false);
     const Login = (event: React.FormEvent<HTMLFormElement>):void => {
         event.preventDefault()
         const data:FormData = new FormData(event.currentTarget)
@@ -29,6 +30,9 @@ export const RegistrationForm = () => {
                     if (res.result === "ok") {
                         navigation("/", {replace: true});
                     } else {
+                        setRejection(true);
+                        setEmailValidation(true);
+                        setUserNameValidation(true);
                         return;
                     }
                 });
@@ -43,14 +47,14 @@ export const RegistrationForm = () => {
                 <Input type='password' id='password' name='password' invalid={invalidPassword}/>
                 <input type="submit" value="Sign-up" className="login-pop-up__sumbit"></input>
                 <div>
-                <span>Have an account?</span>
-                <Link to={'/sign-in'}>Sign-in</Link>
-            </div>
+                    <span>Have an account?</span>
+                    <Link to={'/sign-in'}>Sign-in</Link>
+                </div>
             </form>
             <label className="login-pop-up__sign-up-labels label-user-name" htmlFor='user_name'>User name</label>
             <label className="login-pop-up__sign-up-labels label-email" htmlFor='email'>Email</label>
             <label className="login-pop-up__sign-up-labels label-password" htmlFor='password'>Password</label>
-            
+            {apiRejected ? <span className='login-pop-up__sign-up--wrong-input'>User already exists</span> : <></>}
         </Div>
     )
 }

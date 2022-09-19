@@ -1,14 +1,16 @@
 import {Div, StyledLink, Input} from './login-form-styled';
 import { UserDataLogin, UserSignIn } from '../api/user-calls';
 import { Link, useNavigate } from 'react-router-dom';
-import { queryClient } from '..';
 import { validateSignIn } from './validation';
 import { useState } from 'react';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 export const LoginForm = () => {
+    const authContext = useAuthContext();
     const navigation = useNavigate();
     const [ivalidEmail, setEmailValidation] = useState(false);
     const [invalidPassword, setPasswordValidation] = useState(false);
+    const [apiRejected, setRejection] = useState(false);
     const Login = (event: React.FormEvent<HTMLFormElement>):void => {
         event.preventDefault()
         const userInput:FormData = new FormData(event.currentTarget)
@@ -26,9 +28,12 @@ export const LoginForm = () => {
             UserSignIn(options)
             .then((response) => {
                 if (response.result === "ok") {
-                    queryClient.refetchQueries(["user"]);
+                    authContext.setLogState(true);
                     navigation("/", {replace: true});
                 } else {
+                    setEmailValidation(true);
+                    setPasswordValidation(true);
+                    setRejection(true);
                     return;
                 }
             });
@@ -42,12 +47,13 @@ export const LoginForm = () => {
                 <Input type='password' id='password' name='password' invalid={invalidPassword}/>
                 <input type="submit" value="Sign-in" className="login-pop-up__sumbit"></input>
                 <div>
-                <span>Don't have an account?</span>
-                <Link to={'/sign-up'}>Registartion</Link>
-            </div>
+                    <span>Don't have an account?</span>
+                    <Link to={'/sign-up'}>Sign-up</Link>
+                </div>
             </form>
             <label className="login-pop-up__sign-in-labels label-user-name" htmlFor='user_name'>Email</label>
             <label className="login-pop-up__sign-in-labels label-password" htmlFor='user_name'>Password</label>
+            {apiRejected ? <span className='login-pop-up__sign-in--wrong-input'>Wrong email or password</span> : <></>}
         </Div>
     )
 }
